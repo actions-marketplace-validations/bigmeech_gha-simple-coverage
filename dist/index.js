@@ -8766,7 +8766,7 @@ const { GITHUB_WORKSPACE } = process.env
 
 const failAt = core.getInput('fail-at');
 try {
-    const lcovPath = path.resolve(GITHUB_WORKSPACE, '../', `${core.getInput('lcov-file-path')}`);
+    const lcovPath = __nccwpck_require__.ab + "gha-read-coverage-actions/" + GITHUB_WORKSPACE + '/' + core.getInput('lcov-file-path');
     console.log({ lcovPath, failAt, GITHUB_WORKSPACE })
     const total = lcov(lcovPath);
 
