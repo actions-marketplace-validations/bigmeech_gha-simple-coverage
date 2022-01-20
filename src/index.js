@@ -4,11 +4,11 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const lcov = require('lcov-total');
 
-const { GITHUB_WORKSPACE } = process.env
+const { GITHUB_WORKSPACE, RUNNER_WORKSPACE } = process.env
 
 const failAt = core.getInput('fail-at');
 try {
-    const lcovPath = path.resolve(GITHUB_WORKSPACE, `${core.getInput('lcov-file-path')}`);
+    const lcovPath = path.resolve(RUNNER_WORKSPACE, `${core.getInput('lcov-file-path')}`);
     console.log({ lcovPath, failAt, GITHUB_WORKSPACE, ENV: process.env });
     const total = lcov(lcovPath);
 
