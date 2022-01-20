@@ -6,12 +6,11 @@ const github = require('@actions/github');
 const lcov = require('lcov-total');
 
 const { GITHUB_WORKSPACE } = process.env
-//Get inputs
-const lcovPath = core.getInput('lcov-file-path');
+
 const failAt = core.getInput('fail-at');
 try {
-    const lconvPathDebug = path.resolve(GITHUB_WORKSPACE, '../', `${lcovPath}`)
-    console.log(lconvPathDebug, { GITHUB_WORKSPACE });
+    const lcovPath = path.resolve(GITHUB_WORKSPACE, '../', `${core.getInput('lcov-file-path')}`)
+    console.log({ lconvPath }, { GITHUB_WORKSPACE });
     const total = lcov(lcovPath);
     if(failAt < total) {
         core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
