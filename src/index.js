@@ -20,7 +20,7 @@ try {
     core.setOutput('coverage-percent', total);
 } catch(e) {
     if(ifFileNotFound) {
-        core.setFailed(`${e.message}`)
+        core.setFailed(`GHA-SC Error: ${e.message}`)
     }
 }
 
