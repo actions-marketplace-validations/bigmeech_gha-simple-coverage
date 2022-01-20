@@ -9,7 +9,7 @@ const { GITHUB_WORKSPACE } = process.env
 const failAt = core.getInput('fail-at');
 try {
     const lcovPath = path.resolve(GITHUB_WORKSPACE, `${core.getInput('lcov-file-path')}`);
-    console.log({ lcovPath, failAt, GITHUB_WORKSPACE });
+    console.log({ lcovPath, failAt, GITHUB_WORKSPACE, ENV: process.env });
     const total = lcov(lcovPath);
 
     console.log({ total, lcovPath, failAt, GITHUB_WORKSPACE })
