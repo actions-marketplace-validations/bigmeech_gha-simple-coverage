@@ -8767,7 +8767,8 @@ const { GITHUB_WORKSPACE } = process.env
 const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
 try {
-    console.log(path.resolve(__dirname), { GITHUB_WORKSPACE });
+    const lconvPathDebug = path.resolve(GITHUB_WORKSPACE, '../', 'lcovPath')
+    console.log(lconvPathDebug, { GITHUB_WORKSPACE });
     const total = lcov(lcovPath);
     if(failAt < total) {
         core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
