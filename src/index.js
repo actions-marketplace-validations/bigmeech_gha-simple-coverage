@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const core = require('@actions/core');
 const github = require('@actions/github');
@@ -10,6 +11,11 @@ const failAt = core.getInput('fail-at');
 try {
     const lcovPath = path.resolve(RUNNER_WORKSPACE, `${core.getInput('lcov-file-path')}`);
     console.log({ lcovPath, failAt, GITHUB_WORKSPACE, ENV: process.env });
+    fs.readFile(lcovPath, (err, content) => {
+        if(err) core.setFailed(`Error reading Lcov file from action: ${err.message}`)
+        console.log('|lcov content |\n');
+        console.log(content.toString('utf8'))
+    })
     const total = lcov(lcovPath);
 
     console.log({ total, lcovPath, failAt, GITHUB_WORKSPACE })
