@@ -5,11 +5,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const lcov = require('lcov-total');
 
-
 //Get inputs
-const lcovPath = core.getInput('lcov-path');
+const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
-const ifFileNotFound = core.getInput('fail-when-file-not-found')
 try {
     const total = lcov(lcovPath);
     if(failAt < total) {
@@ -19,8 +17,6 @@ try {
     console.log(`Event Payload: ${payload}`);
     core.setOutput('coverage-percent', total);
 } catch(e) {
-    if(ifFileNotFound) {
-        core.setFailed(`GHA-SC Error: ${e.message}`)
-    }
+    core.setFailed(`GHA-SC Error: ${e.message}. Please make sure an lcov file was generated for your source code`)
 }
 
