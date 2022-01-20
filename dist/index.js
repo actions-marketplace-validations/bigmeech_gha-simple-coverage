@@ -8767,7 +8767,10 @@ const { GITHUB_WORKSPACE } = process.env
 const failAt = core.getInput('fail-at');
 try {
     const lcovPath = path.resolve(GITHUB_WORKSPACE, '../', `${core.getInput('lcov-file-path')}`);
+    console.log({ lcovPath, failAt, GITHUB_WORKSPACE })
     const total = lcov(lcovPath);
+
+    console.log({ total, lcovPath, failAt, GITHUB_WORKSPACE })
     if(failAt < total) {
         core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
     }
@@ -8775,7 +8778,7 @@ try {
     console.log(`Event Payload: ${payload}`);
     core.setOutput('coverage-percent', total);
 } catch(e) {
-    core.setFailed(`GHA-SC Error: ${e.message}. Please make sure an lcov file was generated for your source code`)
+    core.setFailed(`Actions Error: ${e.message}. Please make sure an lcov file was generated for your source code`)
 }
 
 
