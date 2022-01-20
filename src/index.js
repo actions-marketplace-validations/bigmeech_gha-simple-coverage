@@ -10,12 +10,14 @@ const { GITHUB_WORKSPACE, RUNNER_WORKSPACE } = process.env
 const failAt = core.getInput('fail-at');
 try {
     const lcovPath = path.resolve(RUNNER_WORKSPACE, `${core.getInput('lcov-file-path')}`);
-    console.log({ lcovPath, failAt, GITHUB_WORKSPACE, ENV: process.env });
+    console.log({ lcovPath, RUNNER_WORKSPACE, GITHUB_WORKSPACE, currentDir: path.resolve(__dirname) });
+
     fs.readFile(lcovPath, (err, content) => {
-        if(err) core.setFailed(`Error reading Lcov file from action: ${err.message}`)
-        console.log('|lcov content |\n');
+        if(err) return core.setFailed(`Error reading Lcov file from action: ${err.message}`)
+        console.log('| lcov content |\n');
         console.log(content.toString('utf8'))
-    })
+    });
+
     const total = lcov(lcovPath);
 
     console.log({ total, lcovPath, failAt, GITHUB_WORKSPACE })
