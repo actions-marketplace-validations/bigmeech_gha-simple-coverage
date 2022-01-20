@@ -5,6 +5,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const lcov = require('lcov-total');
 
+const { GITHUB_WORKSPACE } = process.env
 //Get inputs
 const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
