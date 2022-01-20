@@ -12,6 +12,7 @@ try {
     const lcovPath = path.resolve(RUNNER_WORKSPACE, `${core.getInput('lcov-file-path')}`);
     console.log({ lcovPath, RUNNER_WORKSPACE, GITHUB_WORKSPACE, currentDir: path.resolve(__dirname) });
 
+    fs.existsSync(lcovPath) ? console.log('yes, file exists') : console.error('file not exist')
     fs.readFile(lcovPath, (err, content) => {
         if(err) return core.setFailed(`Error reading Lcov file from action: ${err.message}`)
         console.log('| lcov content |\n');
@@ -22,7 +23,7 @@ try {
 
     console.log({ total, lcovPath, failAt, GITHUB_WORKSPACE })
     if(failAt < total) {
-        core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
+        return core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
     }
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`Event Payload: ${payload}`);
