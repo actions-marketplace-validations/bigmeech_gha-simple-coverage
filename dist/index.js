@@ -8762,11 +8762,11 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const lcov = __nccwpck_require__(9672);
 
-
 //Get inputs
 const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
 try {
+    console.log(path.resolve(__dirname));
     const total = lcov(lcovPath);
     if(failAt < total) {
         core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);

@@ -9,6 +9,7 @@ const lcov = require('lcov-total');
 const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
 try {
+    console.log(path.resolve(__dirname));
     const total = lcov(lcovPath);
     if(failAt < total) {
         core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
