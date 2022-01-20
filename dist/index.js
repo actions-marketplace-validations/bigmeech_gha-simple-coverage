@@ -8767,7 +8767,7 @@ const { GITHUB_WORKSPACE } = process.env
 const lcovPath = core.getInput('lcov-file-path');
 const failAt = core.getInput('fail-at');
 try {
-    const lconvPathDebug = path.resolve(GITHUB_WORKSPACE, '../', 'lcovPath')
+    const lconvPathDebug = path.resolve(GITHUB_WORKSPACE, '../', `${lcovPath}`)
     console.log(lconvPathDebug, { GITHUB_WORKSPACE });
     const total = lcov(lcovPath);
     if(failAt < total) {
