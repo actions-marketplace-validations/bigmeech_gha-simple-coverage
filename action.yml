@@ -1,5 +1,8 @@
 name: "Github Actions Simple Coverage"
 description: "Determine if a job/step should pass based on coverage data from lcov file"
+branding:
+  icon: life-buoy
+  color: blue
 inputs:
   lcov-file-path: # id of input
     description: "path to lcov file"
