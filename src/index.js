@@ -8,13 +8,16 @@ const { GITHUB_WORKSPACE } = process.env
 (function () {
     const failIfBelow = core.getInput('fail-if-below');
     const lcovPath = path.resolve(GITHUB_WORKSPACE, `${core.getInput('lcov-file-path')}`);
-
     try {
+        if(!fs.existsSync(lcovPath))
+            return core.setFailed(`lcov file not found at: ${lcovPath}`);
+
         const lcovContent = fs.readFileSync(lcovPath);
         console.log(lcovContent.toString('utf8'));
 
         const total = lcov(lcovPath);
-        if(total < failIfBelow) return core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
+        if(total < failIfBelow)
+            return core.setFailed(`Code coverage constraint was not met: ${total}/${failAt}`);
 
         core.setOutput('coverage-percent', total);
     } catch(e) {
