@@ -22,7 +22,7 @@ function handleAction() {
     const total = lcov(lcovPath);
     if (total < failIfBelow)
       return core.setFailed(
-        `Code coverage constraint was not met: ${total}/${failAt}`
+        `Code coverage constraint was not met: ${total}/${failIfBelow}`
       );
 
     core.setOutput("coverage-percent", total);
