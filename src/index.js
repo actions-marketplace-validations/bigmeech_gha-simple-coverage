@@ -13,6 +13,7 @@ try {
     console.log({ lcovPath, RUNNER_WORKSPACE, GITHUB_WORKSPACE, currentDir: path.resolve(__dirname) });
 
     fs.existsSync(lcovPath) ? console.log('yes, file exists') : console.error('file not exist')
+    fs.existsSync(RUNNER_WORKSPACE) ? console.log('yes, dir exists') : console.error('dir not exist')
     fs.readFile(lcovPath, (err, content) => {
         if(err) return core.setFailed(`Error reading Lcov file from action: ${err.message}`)
         console.log('| lcov content |\n');
