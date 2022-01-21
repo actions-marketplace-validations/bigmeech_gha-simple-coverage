@@ -9,7 +9,7 @@ const { GITHUB_WORKSPACE, RUNNER_WORKSPACE } = process.env
 
 const failAt = core.getInput('fail-at');
 try {
-    const lcovPath = path.resolve(RUNNER_WORKSPACE, `${core.getInput('lcov-file-path')}`);
+    const lcovPath = path.resolve(GITHUB_WORKSPACE, `${core.getInput('lcov-file-path')}`);
     console.log({ lcovPath, RUNNER_WORKSPACE, GITHUB_WORKSPACE, currentDir: path.resolve(__dirname) });
 
     fs.existsSync(lcovPath) ? console.log('yes, file exists') : console.error('file not exist')
