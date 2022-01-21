@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest test",
-    "build": "ncc build ./src/index.js"
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,7 @@
     "lcov-total": "^1.0.7"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.1",
-    "jest": "^27.4.7"
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1"
   }
 }
