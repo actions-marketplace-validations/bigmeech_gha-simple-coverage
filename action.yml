@@ -5,14 +5,10 @@ inputs:
     description: "path to lcov file"
     required: true
     default: "./lcov.info"
-  fail-at:
+  fail-if-below:
     description: "coverage percentage to trigger failure"
     required: true
     default: 100
-  fail-when-file-not-found:
-    description: "what to do if lcov file is not found"
-    required: false
-    default: true
 outputs:
   coverage-percent: # id of output
     description: "result of coverage based on the fail-at value"
